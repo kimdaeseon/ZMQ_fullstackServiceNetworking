@@ -1,8 +1,8 @@
 {
-  "name": "sample",
+  "name": "lecture_05_zmq_source_code_2",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "lec-05-prg-05-pub-sub-and-pull-push-server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
