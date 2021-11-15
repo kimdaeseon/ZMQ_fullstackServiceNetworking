@@ -1,24 +1,16 @@
 const zmq = require("zeromq");
 
-const socket = zmq.socket("req");
-const addr = "tcp://127.0.0.1:5555"
-socket.connect(addr);
-let times = 0
+const app = async ()=>{
+    const socket = new zmq.Request;
+    await socket.connect("tcp://127.0.0.1:5555");
+    for (let request = 0; request < 10; request++){
+        console.log("Sending request", request, "...")
+        await socket.send("Hello")
 
-socket.on("message", function(msg){
-	console.log("Received reply", times, "[", msg.toString(), "]");
-        times = times + 1
-})
-
-const app = (addr)=>{
-    const sendMessage = setInterval(function(){
-        console.log("Sending request", times, "…");
-        socket.send("Hello")
-    }, 1000);
-    const finishTimer = setTimeout(function(){
-        clearTimeout(sendMessage);
-        socket.disconnect("tcp://127.0.0.1:5555")
-    }, 11000);
+        const [msg] = await socket.receive()
+        console.log("Received reply", request, "[", msg.toString(), "]")
+        await new Promise(resolve=>setTimeout(resolve, 1000))
+    }
 }
 
 app()

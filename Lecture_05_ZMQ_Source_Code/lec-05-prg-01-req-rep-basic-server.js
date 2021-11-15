@@ -1,10 +1,17 @@
 const zmq = require("zeromq");
 
-const socket = zmq.socket("rep")
-socket.bind("tcp://127.0.0.1:5555");
+const app = async function(){
+	const socket = new zmq.Reply
+	await socket.bind("tcp://127.0.0.1:5555");
+	while(true){
+		const [msg] = await socket.receive()
+		console.log("Received request:", msg.toString())
+		socket.send("World")
+	}
+}
 
-socket.on("message", function(msg){
-	console.log("Received request:", msg.toString())
-	socket.send("World")
-})
+app()
+
+
+
 
