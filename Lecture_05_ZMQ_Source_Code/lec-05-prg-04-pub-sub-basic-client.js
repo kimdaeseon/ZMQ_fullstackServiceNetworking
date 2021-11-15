@@ -11,7 +11,7 @@ const run = async function(){
     const zip_filter = getZipFilter(process.argv)
     const socket = new zmq.Subscriber
     await socket.connect("tcp://127.0.0.1:3000")
-    socket.subscribe("10001")
+    socket.subscribe(zip_filter)
 
     for await (const [zipcode, temperature, relhumidity] of socket) {
         total_temp += parseInt(temperature.toString())
