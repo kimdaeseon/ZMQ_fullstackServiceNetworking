@@ -7,7 +7,7 @@ const app = async function(){
     pullSocket.bindSync("tcp://127.0.0.1:5558")
 
     pullSocket.on("message", function(msg){
-        console.log("I: publishing update", msg.toString())
+        console.log("Server: publishing update => ", msg.toString())
         publishSocket.send(msg)
     })
 }
