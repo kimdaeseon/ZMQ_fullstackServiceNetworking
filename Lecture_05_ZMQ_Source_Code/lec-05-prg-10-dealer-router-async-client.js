@@ -10,6 +10,7 @@ class ClientTask{
         const identity = this.id 
         dealerSocket.routingId = String(identity)
         dealerSocket.connect("tcp://127.0.0.1:5570")
+        dealerSocket.receiveTimeout = 500
         console.log("Client", identity, "started")
         let count = 0
         while(true){
