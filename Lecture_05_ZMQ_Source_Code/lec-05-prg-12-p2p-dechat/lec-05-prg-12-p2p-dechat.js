@@ -5,7 +5,7 @@ const ip = require('ip')
 const search_nameserver = async (ip_mask, local_ip_addr, port_nameserver) =>{
     const subscribeSocket = new zmq.Subscriber
     result = ""
-    for (let i = 0 ; i < 10; i++){
+    for (let i = 0 ; i < 256; i++){
         let target_ip_addr = "tcp://"+String(ip_mask)+"."+String(i)+":"+port_nameserver
         if(target_ip_addr != local_ip_addr || target_ip_addr == local_ip_addr){
             subscribeSocket.connect(target_ip_addr)
